@@ -36,7 +36,8 @@ jobs:
       - name: Build Docker image  
         run: |  
           REPO_URL=${{ vars.JF_HOST }}/dro-oci-dev-virtual
-          docker build -t ${REPO_URL}/dro-evd-go-app:${{ github.run_number }} --platform linux/amd64 --push .
+          docker build --output=type=docker -t ${REPO_URL}/dro-evd-go-app:${{ github.run_number }} 
+          jf docker push ${REPO_URL}/dro-evd-go-app:${{ github.run_number }} 
       - name: Evidence on docker
         run: |
           echo '{ "actor": "${{ github.actor }}", "date": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'" }' > sign.json
