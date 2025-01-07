@@ -45,7 +45,7 @@ jobs:
           jf evd create --package-name dro-evd-go-app --package-version ${{ github.run_number }} --package-repo-name ${REPO_NAME} \
           --key "${{ secrets.PRIVATE_KEY }}" --key-alias ${{ secrets.KEY_ALIAS }} \
           --predicate ./sign.json --predicate-type https://jfrog.com/evidence/signature/v1  --project ${{ vars.JF_PROJECT_KEY }}
-          echo '🔎 Evidence attached: `signature` 🔏 '
+          echo '🔎 Evidence attached: `signature` 🔏 '  >> $GITHUB_STEP_SUMMARY
       - name: Collecting Information from Git
         run: jf rt build-add-git
 
@@ -53,7 +53,7 @@ jobs:
         run: jf rt build-collect-env
 
       - name: Publish build info
-        run: jfrog rt build-publish
+        run: jfrog rt build-publish --project=${{ vars.JF_PROJECT_KEY }}
       - name: Sign build evidence
         run: |
           echo '{ "actor": "${{ github.actor }}", "date": "'$(date -u +"%Y-%m-%dT%H:%M:%SZ")'" }' > sign.json
