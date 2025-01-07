@@ -65,5 +65,5 @@ jobs:
       - name: Create release bundle
         run: |
          
-          jf release-bundle-create davidro-evd-demo ${{ github.run_number }} --signing-key ${{ secrets.RB_KEY }} --build-name ${{ github.workflow }} --build-number ${{ github.run_number }} --sync=true --project=${{ vars.JF_PROJECT_KEY }}
+          jf release-bundle-create davidro-evd-demo ${{ github.run_number }} --project=${{ vars.JF_PROJECT_KEY }} --signing-key ${{ secrets.RB_KEY }} --build-name ${{ github.workflow }} --build-number ${{ github.run_number }} --sync=true 
           echo '📦 Release bundle ${{ github.actor }}-evidence-enablement created' >> $GITHUB_STEP_SUMMARY
