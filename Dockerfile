@@ -1,5 +1,3 @@
-ARG REPO_URL
-
 # Stage 1: Build the Go application
 FROM golang:1.23.3-alpine AS builder
 
