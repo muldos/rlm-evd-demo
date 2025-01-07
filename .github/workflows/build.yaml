@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REPO_NAME: dro-oci-dev-local
+      JF_PROJECT: ${{ vars.JF_PROJECT_KEY }}
     steps:
       - uses: actions/checkout@v4
       - name: Install jfrog cli
@@ -37,7 +38,6 @@ jobs:
         run: |  
           REPO_URL=${{ vars.JF_HOST }}/dro-oci-dev-virtual
           docker build --load -t ${REPO_URL}/dro-evd-go-app:${{ github.run_number }} .
-          docker images
           jf docker push ${REPO_URL}/dro-evd-go-app:${{ github.run_number }} 
       - name: Evidence on docker
         run: |
